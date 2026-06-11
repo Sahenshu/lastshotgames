@@ -521,16 +521,25 @@ html[data-theme="light"] .team-name-input { border-bottom-color: rgba(0,0,0,0.15
 .song-embed { display: none; }
 .song-embed.open { display: block; }
 
-/* ─── SONG SPOTIFY PLAYER ─── */
-.spotify-wrap {
-  width: 100%;
-  background: #121212;
+/* ─── SONG AUDIO PLAYER ─── */
+.audio-player {
+  padding: 0.75rem 1rem;
+  background: rgba(252,185,92,0.06);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
-.spotify-wrap iframe {
-  display: block;
+.audio-player audio {
+  flex: 1;
+  height: 36px;
+  min-width: 0;
   width: 100%;
-  height: 152px;
-  border: none;
+}
+.audio-loading {
+  padding: 0.6rem 1rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-style: italic;
 }
 
 .song-object-tag {
@@ -1116,18 +1125,19 @@ const twisters = [
   { text: "Freshly fried flying fish. Freshly fried flying fish. Freshly fried flying fish. Three times, no pause.", level: "Deceptive" },
 ];
 
-// Songs with Spotify track IDs — embedded inline via Spotify embed (works on Netlify)
+// Songs — iTunes Search API provides free 30s MP3 previews, no auth needed.
+// itunes query: artist + track name. previewUrl is fetched on page load.
 const songs = [
-  { title: "Kala Chashma", movie: "Baar Baar Dekho", spotifyId: "6mdLX10dvBb7rGYbMXpKzz", object: "Sunglasses" },
-  { title: "Tune Maari Entriyaan", movie: "Gunday", spotifyId: "2JSZhhYdzDbvN1YplDoJUR", object: "Entry card / ID" },
-  { title: "Bole Chudiyan", movie: "K3G", spotifyId: "10JFE3POLCsisDZSfejjIF", object: "Bangles" },
-  { title: "What Jhumka?", movie: "Rocky Aur Rani", spotifyId: "4uNxdQ1L4Xa52MWX864QhW", object: "Earrings" },
-  { title: "Fevicol Se", movie: "Dabangg 2", spotifyId: "4cCC37JvexySD9jAGFiAuU", object: "Glue / Fevicol" },
-  { title: "Tujhko Mirchi Lagi Toh", movie: "Coolie No.1", spotifyId: "46HqZTCD7Wqd0Q95iuuHmt", object: "Chilli / mirchi" },
-  { title: "Kora Kagaz", movie: "Aradhana", spotifyId: "58XCR4OiSlFULlDmACjrF8", object: "Blank paper" },
-  { title: "Ek Garam Chai Ki Pyaali Ho", movie: "Har Dil Jo Pyar Karega", spotifyId: "708PMEzm020VA9DL6Rq8ip", object: "Tea cup / mug" },
-  { title: "Nimbooda", movie: "Hum Dil De Chuke Sanam", spotifyId: "1uuSQ8eR2i3oHq8DRC4PEL", object: "Lemon" },
-  { title: "Chunari Chunari", movie: "Biwi No.1", spotifyId: "20DabwrGrz88OR6miTjtt3", object: "Dupatta / scarf" },
+  { title: "Kala Chashma", movie: "Baar Baar Dekho", itunes: "Kala Chashma Badshah", object: "Sunglasses", previewUrl: null },
+  { title: "Tune Maari Entriyaan", movie: "Gunday", itunes: "Tune Maari Entriyaan Vishal Dadlani", object: "Entry card / ID", previewUrl: null },
+  { title: "Bole Chudiyan", movie: "K3G", itunes: "Bole Chudiyan Sonu Nigam", object: "Bangles", previewUrl: null },
+  { title: "What Jhumka?", movie: "Rocky Aur Rani", itunes: "What Jhumka Arijit Singh", object: "Earrings", previewUrl: null },
+  { title: "Fevicol Se", movie: "Dabangg 2", itunes: "Fevicol Se Mamta Sharma", object: "Glue / Fevicol", previewUrl: null },
+  { title: "Tujhko Mirchi Lagi Toh", movie: "Coolie No.1", itunes: "Mirchi Lagi Toh Kumar Sanu", object: "Chilli / mirchi", previewUrl: null },
+  { title: "Kora Kagaz", movie: "Aradhana", itunes: "Kora Kagaz Tha Yeh Mann Kishore Kumar", object: "Blank paper", previewUrl: null },
+  { title: "Ek Garam Chai Ki Pyaali Ho", movie: "Har Dil Jo Pyar Karega", itunes: "Ek Garam Chai Ki Pyaali Anu Malik", object: "Tea cup / mug", previewUrl: null },
+  { title: "Nimbooda", movie: "Hum Dil De Chuke Sanam", itunes: "Nimbooda Kavita Krishnamurthy", object: "Lemon", previewUrl: null },
+  { title: "Chunari Chunari", movie: "Biwi No.1", itunes: "Chunari Chunari Abhijeet", object: "Dupatta / scarf", previewUrl: null },
 ];
 
 // ═══════════════ STATE ═══════════════
@@ -1266,37 +1276,62 @@ function pickPicWord() {
   document.getElementById('pic-word').textContent = picWords[Math.floor(Math.random() * picWords.length)];
 }
 
-// ─── SONGS — Spotify embed player ───
-// Spotify embeds work on any https:// hosted page (Netlify, etc.) with no restrictions.
-// The embed shows album art, title, and a play button. No login needed for 30s previews;
-// logged-in users get the full track.
+// ─── SONGS — iTunes preview player ───
+// iTunes Search API gives free 30-second MP3 previews — no auth, no CORS issues.
+// We fetch all preview URLs on page load, then play via native <audio> on click.
+// native audio.play() inside a click handler is always allowed by browsers.
+
+let activeAudio = null; // currently playing Audio object
+let activePrefix = null;
+let activeIdx = null;
+
+async function fetchItunesPreview(song, i) {
+  const query = encodeURIComponent(song.itunes);
+  const url = 'https://itunes.apple.com/search?term=' + query + '&media=music&entity=song&limit=3&country=IN';
+  try {
+    const resp = await fetch(url);
+    const data = await resp.json();
+    const hit = data.results.find(function(r){ return r.previewUrl; });
+    if (hit) {
+      songs[i].previewUrl = hit.previewUrl;
+      // Update all rendered cards for this song index
+      ['', 't'].forEach(function(pfx) {
+        const lbl = document.getElementById(pfx + 'sprev-lbl-' + i);
+        if (lbl) lbl.textContent = '';
+        const btn = document.getElementById(pfx + 'splay-' + i);
+        if (btn) btn.disabled = false;
+      });
+    } else {
+      ['', 't'].forEach(function(pfx) {
+        const lbl = document.getElementById(pfx + 'sprev-lbl-' + i);
+        if (lbl) lbl.textContent = '(no preview)';
+      });
+    }
+  } catch(e) {
+    console.warn('iTunes fetch failed for', song.title, e);
+  }
+}
+
+function preloadAllPreviews() {
+  songs.forEach(function(s, i) { fetchItunesPreview(s, i); });
+}
 
 function makeSongCard(s, i, prefix) {
-  const baseSrc = 'https://open.spotify.com/embed/track/' + s.spotifyId + '?utm_source=generator&theme=0';
-  const autoSrc = baseSrc + '&autoplay=1';
-  return `
-    <div class="song-card" id="${prefix}scard-${i}">
-      <div class="song-header" onclick="toggleSongCard(${i},'${prefix}')">
-        <div class="song-num">${i+1}</div>
-        <div style="flex:1;min-width:0">
-          <div class="song-title-text">${s.title}</div>
-          <div class="song-movie">${s.movie}</div>
-        </div>
-        <button class="song-play-btn" id="${prefix}splay-${i}" aria-label="Play">&#9654;</button>
-      </div>
-      <div class="song-embed" id="${prefix}sembed-${i}">
-        <div class="spotify-wrap">
-          <iframe id="${prefix}sp-iframe-${i}"
-            src="${baseSrc}"
-            data-base="${baseSrc}"
-            data-auto="${autoSrc}"
-            width="100%" height="152" frameBorder="0" allowfullscreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            style="display:block;border-radius:0;"></iframe>
-        </div>
-        <div class="song-object-tag">Grab: <strong>${s.object}</strong></div>
-      </div>
-    </div>`;
+  return '<div class="song-card" id="' + prefix + 'scard-' + i + '">' +
+    '<div class="song-header" onclick="toggleSongCard(' + i + ','' + prefix + '')">' +
+      '<div class="song-num">' + (i+1) + '</div>' +
+      '<div style="flex:1;min-width:0">' +
+        '<div class="song-title-text">' + s.title + '</div>' +
+        '<div class="song-movie">' + s.movie + '</div>' +
+      '</div>' +
+      '<span class="audio-loading" id="' + prefix + 'sprev-lbl-' + i + '">⏳</span>' +
+      '<button class="song-play-btn" id="' + prefix + 'splay-' + i + '" disabled aria-label="Play">▶</button>' +
+    '</div>' +
+    '<div class="song-embed" id="' + prefix + 'sembed-' + i + '">' +
+      '<div class="audio-player" id="' + prefix + 'saudio-wrap-' + i + '"></div>' +
+      '<div class="song-object-tag">Grab: <strong>' + s.object + '</strong></div>' +
+    '</div>' +
+  '</div>';
 }
 
 function renderSongs() {
@@ -1307,26 +1342,54 @@ function renderTeamSongs() {
 }
 
 function toggleSongCard(i, prefix) {
-  const embed = document.getElementById(prefix + 'sembed-' + i);
-  const isOpen = embed.classList.contains('open');
+  var embed = document.getElementById(prefix + 'sembed-' + i);
+  var isOpen = embed.classList.contains('open');
 
-  // Stop all other open players by resetting src (removes autoplay, pauses)
+  // Stop current audio and close all cards
+  if (activeAudio) {
+    activeAudio.pause();
+    activeAudio.currentTime = 0;
+    activeAudio = null;
+  }
   songs.forEach(function(s, j) {
-    const otherEmbed = document.getElementById(prefix + 'sembed-' + j);
-    if (otherEmbed && otherEmbed.classList.contains('open')) {
-      otherEmbed.classList.remove('open');
-      document.getElementById(prefix + 'splay-' + j).textContent = '\u25b6';
-      const f = document.getElementById(prefix + 'sp-iframe-' + j);
-      if (f) f.src = f.dataset.base;
-    }
+    var e = document.getElementById(prefix + 'sembed-' + j);
+    if (e) e.classList.remove('open');
+    var b = document.getElementById(prefix + 'splay-' + j);
+    if (b) b.textContent = '▶';
   });
 
   if (!isOpen) {
     embed.classList.add('open');
-    document.getElementById(prefix + 'splay-' + i).textContent = '\u25a0';
-    // Swap to autoplay src — this click IS the user gesture browsers require
-    const frame = document.getElementById(prefix + 'sp-iframe-' + i);
-    if (frame) frame.src = frame.dataset.auto;
+    var playBtn = document.getElementById(prefix + 'splay-' + i);
+    playBtn.textContent = '■';
+    var wrap = document.getElementById(prefix + 'saudio-wrap-' + i);
+
+    if (!songs[i].previewUrl) {
+      wrap.innerHTML = '<span style="font-size:0.8rem;color:var(--muted)">Preview not available</span>';
+      return;
+    }
+
+    // Create audio element and play — this runs inside a click handler (user gesture)
+    var audio = new Audio(songs[i].previewUrl);
+    audio.controls = true;
+    audio.style.width = '100%';
+    audio.style.height = '36px';
+    wrap.innerHTML = '';
+    wrap.appendChild(audio);
+    activeAudio = audio;
+    activePrefix = prefix;
+    activeIdx = i;
+
+    audio.play().catch(function(e) {
+      console.warn('Autoplay blocked:', e);
+      // controls are still shown so user can press play manually
+    });
+
+    audio.addEventListener('ended', function() {
+      embed.classList.remove('open');
+      playBtn.textContent = '▶';
+      activeAudio = null;
+    });
   }
 }
 
@@ -1523,6 +1586,7 @@ renderBW();
 renderPun();
 renderLogo();
 renderTeams();
+preloadAllPreviews();
 </script>
 </body>
 </html>

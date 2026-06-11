@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Office Fun Games 2025</title>
+<style>
+/* ═══════════════ THEMES ═══════════════ */
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --card: #1a1a26;
+  --border: rgba(255,255,255,0.08);
+  --border-bright: rgba(255,255,255,0.15);
+  --text: #f0f0f8;
+  --muted: #888899;
+  --accent: #7c5cfc;
+  --accent2: #fc5c7d;
+  --accent3: #5cf8c8;
+  --accent4: #fcb95c;
+  --gold: #ffd700;
+  --nav-bg: rgba(10,10,15,0.94);
+}
+
+/* Light mode */
+html[data-theme="light"] {
+  --bg: #f5f4f0;
+  --surface: #eceae4;
+  --card: #ffffff;
+  --border: rgba(0,0,0,0.08);
+  --border-bright: rgba(0,0,0,0.15);
+  --text: #1a1a2e;
+  --muted: #666680;
+  --nav-bg: rgba(245,244,240,0.95);
+}
+
+/* Colour Scheme: Midnight (default dark) */
+html[data-scheme="midnight"] {
+  --accent: #7c5cfc;
+  --accent2: #fc5c7d;
+  --accent3: #5cf8c8;
+  --accent4: #fcb95c;
+  --gold: #ffd700;
+}
+
+/* Colour Scheme: Saffron */
+html[data-scheme="saffron"] {
+  --accent: #f97316;
+  --accent2: #fbbf24;
+  --accent3: #34d399;
+  --accent4: #fb7185;
+  --gold: #ffd700;
+}
+
+/* Colour Scheme: Rose Garden */
+html[data-scheme="rose"] {
+  --accent: #e879f9;
+  --accent2: #f43f5e;
+  --accent3: #a78bfa;
+  --accent4: #fbbf24;
+  --gold: #ffd700;
+}
+
+/* Colour Scheme: Ocean */
+html[data-scheme="ocean"] {
+  --accent: #22d3ee;
+  --accent2: #818cf8;
+  --accent3: #34d399;
+  --accent4: #fb923c;
+  --gold: #ffd700;
+}
+
+/* Colour Scheme: Forest */
+html[data-scheme="forest"] {
+  --accent: #4ade80;
+  --accent2: #facc15;
+  --accent3: #60a5fa;
+  --accent4: #f87171;
+  --gold: #ffd700;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ─── HEADER ─── */
+.header {
+  text-align: center;
+  padding: 2.5rem 2rem 1.5rem;
+  background: linear-gradient(180deg, rgba(124,92,252,0.12) 0%, transparent 100%);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.header h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--text) 0%, var(--accent) 50%, var(--accent2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.9rem; }
+
+/* ─── TOOLBAR (top controls) ─── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.8rem 2rem;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ─── NAV TABS ─── */
+.nav-tab {
+  padding: 0.55rem 1.4rem;
+  border-radius: 100px;
+  border: 1px solid var(--border-bright);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.nav-tab:hover { color: var(--text); border-color: var(--accent); }
+.nav-tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ─── CONTROLS RIGHT ─── */
+.toolbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: auto;
+}
+
+/* Toggle dark/light */
+.toggle-btn {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border-bright);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+.toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ─── SCHEME PICKER ─── */
+.scheme-picker {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.scheme-dot {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.18s;
+  position: relative;
+}
+.scheme-dot:hover { transform: scale(1.2); }
+.scheme-dot.active { border-color: var(--text); transform: scale(1.15); }
+.scheme-dot[data-scheme="midnight"] { background: linear-gradient(135deg,#7c5cfc,#fc5c7d); }
+.scheme-dot[data-scheme="saffron"]  { background: linear-gradient(135deg,#f97316,#fbbf24); }
+.scheme-dot[data-scheme="rose"]     { background: linear-gradient(135deg,#e879f9,#f43f5e); }
+.scheme-dot[data-scheme="ocean"]    { background: linear-gradient(135deg,#22d3ee,#818cf8); }
+.scheme-dot[data-scheme="forest"]   { background: linear-gradient(135deg,#4ade80,#facc15); }
+
+/* ─── FULLSCREEN BTN ─── */
+.fs-btn {
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-bright);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.fs-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+
+/* ─── SECTIONS ─── */
+.section {
+  display: none;
+  padding: 2rem max(1rem, calc(50% - 620px));
+  min-height: calc(100vh - 120px);
+}
+.section.active { display: block; }
+
+/* ─── SECTION SLIDE MODE ─── */
+body.slide-mode .section.active {
+  padding: 1.5rem max(1.5rem, calc(50% - 680px));
+}
+
+/* ─── SECTION HEADERS ─── */
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.section-subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+
+/* ─── GAME CARDS GRID ─── */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.game-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.2rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.game-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.game-card.active-game { border-color: var(--accent2); background: rgba(252,92,125,0.07); }
+.game-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.game-title { font-size: 0.88rem; font-weight: 700; }
+.game-desc { font-size: 0.73rem; color: var(--muted); margin-top: 0.2rem; }
+
+/* ─── GAME CONTENT AREA ─── */
+.game-content {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.game-content h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.8rem; }
+
+/* Slide-mode game content expands */
+body.slide-mode .game-content {
+  min-height: calc(100vh - 180px);
+  padding: 2.5rem;
+}
+
+/* ─── QUESTION BLOCK ─── */
+.question-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.75rem;
+  margin-bottom: 1.25rem;
+}
+.q-number { font-size: 0.75rem; color: var(--accent); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.q-text { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; line-height: 1.45; }
+.q-options { display: flex; flex-direction: column; gap: 0.5rem; }
+.q-option {
+  padding: 0.75rem 1.1rem;
+  border: 1px solid var(--border-bright);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-size: 0.88rem;
+}
+.q-option:hover { border-color: var(--accent); background: rgba(124,92,252,0.08); }
+.q-open-answer {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-bright);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.92rem;
+  resize: vertical;
+  min-height: 80px;
+}
+.q-open-answer:focus { outline: none; border-color: var(--accent); }
+
+/* ─── BARS ─── */
+.bar-row { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.55rem; }
+.bar-opt { font-size: 0.82rem; min-width: 90px; color: var(--text); }
+.bar-track { flex: 1; height: 26px; background: var(--surface); border-radius: 6px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 6px; transition: width 0.6s ease; display: flex; align-items: center; padding-left: 8px; font-size: 0.78rem; font-weight: 600; color: #fff; }
+.bar-count { font-size: 0.8rem; min-width: 28px; text-align: right; color: var(--muted); }
+
+/* ─── PRESENTER NAV ─── */
+.presenter-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: 0.6rem 1.3rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-bright);
+  background: transparent;
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn:hover { background: rgba(255,255,255,0.07); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-primary:hover { opacity: 0.88; }
+.btn-danger { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+.btn-success { background: #1faa6e; border-color: #1faa6e; color: #fff; }
+.btn-gold { background: var(--gold); border-color: var(--gold); color: #1a1000; }
+.q-counter { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+
+/* ─── VOTING CARD ─── */
+.voting-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  margin-bottom: 1.25rem;
+}
+.vote-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 0.7rem; margin-top: 0.8rem; }
+.vote-item {
+  padding: 1rem 0.7rem;
+  text-align: center;
+  border: 1px solid var(--border-bright);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.vote-item:hover { border-color: var(--accent3); background: rgba(92,248,200,0.07); }
+.vote-item.voted { border-color: var(--accent2); background: rgba(252,92,125,0.12); }
+.vote-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; margin: 0 auto 0.4rem;
+}
+.vote-name { font-size: 0.78rem; font-weight: 600; }
+.vote-tally { font-size: 1.1rem; font-weight: 700; color: var(--accent4); }
+
+/* ─── TEAM SECTION ─── */
+.teams-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.add-team-btn {
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: 1px dashed var(--border-bright);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: all 0.15s;
+}
+.add-team-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+.team-card {
+  border-radius: 14px;
+  padding: 1.3rem;
+  border: 1px solid var(--border);
+  position: relative;
+}
+.team-name-input {
+  font-size: 1rem;
+  font-weight: 700;
+  background: transparent;
+  border: none;
+  color: inherit;
+  width: 100%;
+  border-bottom: 1px dashed rgba(255,255,255,0.2);
+  padding-bottom: 3px;
+  margin-bottom: 0.8rem;
+}
+html[data-theme="light"] .team-name-input { border-bottom-color: rgba(0,0,0,0.15); }
+.team-name-input:focus { outline: none; }
+.team-score { font-size: 2.8rem; font-weight: 800; text-align: center; margin: 0.4rem 0; }
+.score-btns { display: flex; gap: 0.4rem; justify-content: center; }
+.score-btn {
+  padding: 0.35rem 0.8rem;
+  border-radius: 7px;
+  border: 1px solid var(--border-bright);
+  background: transparent;
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.score-btn:hover { background: rgba(255,255,255,0.1); }
+.score-btn.plus { border-color: var(--accent3); color: var(--accent3); }
+.score-btn.minus { border-color: var(--accent2); color: var(--accent2); }
+.remove-team {
+  position: absolute; top: 0.7rem; right: 0.7rem;
+  width: 22px; height: 22px; border-radius: 50%;
+  border: none; background: rgba(255,255,255,0.06);
+  color: var(--muted); cursor: pointer; font-size: 0.78rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.remove-team:hover { background: rgba(252,92,125,0.2); color: var(--accent2); }
+.team-card:nth-child(1) { background: linear-gradient(135deg, rgba(124,92,252,0.12), rgba(124,92,252,0.04)); border-color: rgba(124,92,252,0.3); color: #c4b5fd; }
+.team-card:nth-child(2) { background: linear-gradient(135deg, rgba(252,92,125,0.12), rgba(252,92,125,0.04)); border-color: rgba(252,92,125,0.3); color: #fda4af; }
+.team-card:nth-child(3) { background: linear-gradient(135deg, rgba(92,248,200,0.12), rgba(92,248,200,0.04)); border-color: rgba(92,248,200,0.3); color: #6ee7b7; }
+.team-card:nth-child(4) { background: linear-gradient(135deg, rgba(252,185,92,0.12), rgba(252,185,92,0.04)); border-color: rgba(252,185,92,0.3); color: #fcd34d; }
+.team-card:nth-child(5) { background: linear-gradient(135deg, rgba(96,165,250,0.12), rgba(96,165,250,0.04)); border-color: rgba(96,165,250,0.3); color: #93c5fd; }
+
+/* ─── PICKER ─── */
+.picker-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.75rem;
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+.picker-result {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--accent4);
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pick-from { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.8rem; }
+
+/* ─── TONGUE TWISTERS ─── */
+.twist-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+.round-badge {
+  display: inline-block;
+  padding: 0.18rem 0.65rem;
+  border-radius: 100px;
+  background: rgba(124,92,252,0.18);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.twist-text { font-size: 1.1rem; font-weight: 600; line-height: 1.5; margin-top: 0.5rem; }
+
+/* ─── SONG GAME ─── */
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1.25rem;
+}
+.song-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.song-card:hover { border-color: var(--accent4); }
+.song-header {
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.song-num {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(252,185,92,0.15);
+  color: var(--accent4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.76rem; font-weight: 700; flex-shrink: 0;
+}
+.song-title-text { font-size: 0.85rem; font-weight: 600; }
+.song-movie { font-size: 0.72rem; color: var(--muted); }
+.song-play-btn {
+  margin-left: auto;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--accent4); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; flex-shrink: 0; transition: all 0.15s;
+  color: #1a1000;
+}
+.song-play-btn:hover { transform: scale(1.1); }
+.song-embed { display: none; }
+.song-embed.open { display: block; }
+
+/* ─── SONG SPOTIFY PLAYER ─── */
+.spotify-wrap {
+  width: 100%;
+  background: #121212;
+}
+.spotify-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 152px;
+  border: none;
+}
+
+.song-object-tag {
+  padding: 0.55rem 1rem;
+  background: rgba(252,185,92,0.08);
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.song-object-tag strong { color: var(--accent4); font-size: 0.88rem; margin-left: 0.3rem; }
+
+/* ─── TIMER ─── */
+.timer-display {
+  font-size: 4rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--accent3);
+  font-variant-numeric: tabular-nums;
+}
+.timer-display.danger { color: var(--accent2); }
+
+/* ─── LINK CARD ─── */
+.link-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+.link-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.15rem; }
+.link-info p { font-size: 0.76rem; color: var(--muted); }
+.link-btn {
+  padding: 0.48rem 1.1rem;
+  border-radius: 7px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.link-btn:hover { opacity: 0.85; }
+
+/* ─── LOGO GRID ─── */
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.logo-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.8rem;
+  text-align: center;
+  min-height: 70px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.3rem;
+}
+.logo-company { font-size: 0.7rem; color: var(--muted); }
+.logo-big { font-size: 1.8rem; }
+
+/* ─── CHARADES ─── */
+.charades-picker {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.75rem;
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+.charade-word {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--accent);
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.02em;
+}
+.charade-hint { font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--card);
+  border: 1px solid var(--border-bright);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 440px;
+  width: 90%;
+  text-align: center;
+}
+.modal-box h3 { font-size: 1.2rem; margin-bottom: 1rem; }
+.modal-big { font-size: 2.8rem; font-weight: 800; color: var(--accent4); margin: 0.8rem 0; }
+
+/* ─── QUIZ INFO ─── */
+.quiz-info {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+/* ─── REVEAL ─── */
+.reveal-btn {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  background: rgba(124,92,252,0.15);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.82rem;
+  border: 1px solid rgba(124,92,252,0.28);
+  transition: all 0.15s;
+  margin-top: 0.4rem;
+}
+.reveal-btn:hover { background: rgba(124,92,252,0.26); }
+.hidden-ans { display: none; background: rgba(92,248,200,0.08); border: 1px solid rgba(92,248,200,0.22); padding: 0.75rem 1.1rem; border-radius: 10px; margin-top: 0.7rem; color: var(--accent3); font-weight: 600; }
+
+/* ─── TAGS ─── */
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 100px;
+  font-size: 0.73rem;
+  font-weight: 700;
+}
+.tag-purple { background: rgba(124,92,252,0.15); color: var(--accent); }
+.tag-pink { background: rgba(252,92,125,0.15); color: var(--accent2); }
+.tag-teal { background: rgba(92,248,200,0.15); color: var(--accent3); }
+
+/* ─── FLEX UTILS ─── */
+.flex-row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.mt1 { margin-top: 1rem; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+/* ─── MENTIMETER HIGHLIGHT ─── */
+.menti-link-card {
+  background: linear-gradient(135deg, rgba(124,92,252,0.12), rgba(252,92,125,0.08));
+  border: 1px solid var(--accent);
+  border-radius: 14px;
+  padding: 1.3rem 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.menti-link-card .link-info h4 { color: var(--accent); }
+.menti-badge {
+  font-size: 0.7rem;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.15rem 0.55rem;
+  border-radius: 100px;
+  font-weight: 700;
+  margin-left: 0.5rem;
+}
+
+/* ─── FULLSCREEN SLIDE MODE ─── */
+body.slide-mode {
+  overflow: hidden;
+}
+body.slide-mode .toolbar {
+  padding: 0.5rem 1.5rem;
+}
+body.slide-mode .header {
+  display: none;
+}
+
+/* ─── MOBILE ─── */
+@media (max-width: 600px) {
+  .section { padding: 1rem; }
+  .games-grid { grid-template-columns: repeat(2, 1fr); }
+  .toolbar-controls { margin-left: 0; }
+  .toolbar { justify-content: flex-start; gap: 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🎉 Office Fun Games 2025</h1>
+  <p>The Samarth Edition · Team Building · Good Vibes Only</p>
+</div>
+
+<div class="toolbar">
+  <button class="nav-tab active" onclick="switchSection('individual',this)">🎮 Individual</button>
+  <button class="nav-tab" onclick="switchSection('team',this)">🏆 Teams</button>
+
+  <div class="toolbar-controls">
+    <!-- Scheme picker -->
+    <div class="scheme-picker" title="Pick colour scheme">
+      <div class="scheme-dot active" data-scheme="midnight" onclick="setScheme('midnight',this)" title="Midnight"></div>
+      <div class="scheme-dot" data-scheme="saffron" onclick="setScheme('saffron',this)" title="Saffron"></div>
+      <div class="scheme-dot" data-scheme="rose" onclick="setScheme('rose',this)" title="Rose Garden"></div>
+      <div class="scheme-dot" data-scheme="ocean" onclick="setScheme('ocean',this)" title="Ocean"></div>
+      <div class="scheme-dot" data-scheme="forest" onclick="setScheme('forest',this)" title="Forest"></div>
+    </div>
+
+    <button class="toggle-btn" id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light">🌙</button>
+    <button class="fs-btn" id="fs-toggle" onclick="toggleSlideMode()">⛶ Focus</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--            INDIVIDUAL SECTION             -->
+<!-- ══════════════════════════════════════════ -->
+<div class="section active" id="section-individual">
+
+  <div class="section-title">🎮 Part A — Presenter Games</div>
+  <div class="section-subtitle">Pick a game to present on screen. Everyone watches together.</div>
+
+  <div class="games-grid">
+    <div class="game-card" id="card-bollywood" onclick="showGame('bollywood')">
+      <div class="game-icon">🎬</div>
+      <div class="game-title">Bollywood Battle</div>
+      <div class="game-desc">English → Song title</div>
+    </div>
+    <div class="game-card" id="card-puns" onclick="showGame('puns')">
+      <div class="game-icon">🖼️</div>
+      <div class="game-title">Puns from Pictures</div>
+      <div class="game-desc">Guess the pun</div>
+    </div>
+    <div class="game-card" id="card-logos" onclick="showGame('logos')">
+      <div class="game-icon">🏷️</div>
+      <div class="game-title">Guess the Logo</div>
+      <div class="game-desc">3 hints, one brand</div>
+    </div>
+    <div class="game-card" id="card-pictionary" onclick="showGame('pictionary')">
+      <div class="game-icon">✏️</div>
+      <div class="game-title">Pictionary</div>
+      <div class="game-desc">Draw it live</div>
+    </div>
+    <div class="game-card" id="card-songs" onclick="showGame('songs')">
+      <div class="game-icon">🎵</div>
+      <div class="game-title">Pick the Object</div>
+      <div class="game-desc">Song → grab the thing</div>
+    </div>
+  </div>
+
+  <!-- BOLLYWOOD BATTLE -->
+  <div class="game-content" id="game-bollywood" style="display:none">
+    <h2>🎬 Bollywood Battle — English Translations</h2>
+    <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.2rem">Read the English. First to shout the song title wins!</p>
+    <div id="bw-question"></div>
+    <div class="presenter-nav">
+      <button class="btn btn-primary" onclick="prevBW()">← Prev</button>
+      <button class="btn btn-primary" onclick="nextBW()">Next →</button>
+      <span class="q-counter" id="bw-counter"></span>
+    </div>
+  </div>
+
+  <!-- PUNS -->
+  <div class="game-content" id="game-puns" style="display:none">
+    <h2>🖼️ Puns from Pictures</h2>
+    <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.2rem">Show the clue, audience guesses the pun.</p>
+    <div id="puns-question"></div>
+    <div class="presenter-nav">
+      <button class="btn btn-primary" onclick="prevPun()">← Prev</button>
+      <button class="btn btn-primary" onclick="nextPun()">Next →</button>
+      <span class="q-counter" id="pun-counter"></span>
+    </div>
+  </div>
+
+  <!-- LOGOS -->
+  <div class="game-content" id="game-logos" style="display:none">
+    <h2>🏷️ Guess the Logo</h2>
+    <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.2rem">Reveal hints one at a time.</p>
+    <div id="logo-question"></div>
+    <div class="presenter-nav">
+      <button class="btn btn-primary" onclick="prevLogo()">← Prev</button>
+      <button class="btn btn-primary" onclick="nextLogo()">Next →</button>
+      <span class="q-counter" id="logo-counter"></span>
+    </div>
+  </div>
+
+  <!-- PICTIONARY -->
+  <div class="game-content" id="game-pictionary" style="display:none">
+    <h2>✏️ Pictionary — Timer</h2>
+    <div style="display:flex;gap:0.75rem;margin-bottom:1.2rem;flex-wrap:wrap">
+      <button class="btn" onclick="setPicTimer(60)">60s</button>
+      <button class="btn" onclick="setPicTimer(90)">90s</button>
+      <button class="btn" onclick="setPicTimer(120)">2 min</button>
+    </div>
+    <div class="timer-display" id="pic-timer">60</div>
+    <div class="flex-row mt1">
+      <button class="btn btn-primary" onclick="startPicTimer()" id="pic-start-btn">▶ Start</button>
+      <button class="btn" onclick="resetPicTimer()">↺ Reset</button>
+    </div>
+    <hr class="divider">
+    <h3 style="margin-bottom:0.8rem;font-size:1rem">Random Word</h3>
+    <div class="charades-picker" style="padding:1.2rem">
+      <div class="charade-word" id="pic-word">—</div>
+      <button class="btn btn-gold mt1" onclick="pickPicWord()">🎲 Pick Word</button>
+    </div>
+  </div>
+
+  <!-- SONGS + OBJECTS (Pick the Object) -->
+  <div class="game-content" id="game-songs" style="display:none">
+    <h2>🎵 Pick the Object — Song Clues</h2>
+    <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.2rem">Play a song snippet. First to grab the right object wins. Click ▶ on any song to play inline.</p>
+    <div class="song-grid" id="song-list"></div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- PART B: ANONYMOUS QUIZ -->
+  <div class="section-title">🕵️ Part B — Anonymous Pulse Check</div>
+  <div class="section-subtitle">Everyone answers live. Results reveal as a chart.</div>
+
+  <div style="margin-bottom:1.25rem">
+    <!-- Highlighted Mentimeter with actual link -->
+    <div class="menti-link-card">
+      <div class="link-info">
+        <h4>Mentimeter <span class="menti-badge">LIVE LINK</span></h4>
+        <p>Open the pre-built presentation — participants scan & vote in real time.</p>
+      </div>
+      <a href="https://www.mentimeter.com/app/presentation/al7i6ic58mhr5rapm4s2ivf23sxqgp79/edit?question=kwga6biczzij" target="_blank" class="link-btn" style="background:var(--accent)">Open Menti ↗</a>
+    </div>
+
+    <div class="link-card">
+      <div class="link-info">
+        <h4>Present live here</h4>
+        <p>Click through questions locally, tally manually.</p>
+      </div>
+      <button class="link-btn" onclick="startLocalQuiz()">Present Questions</button>
+    </div>
+  </div>
+
+  <!-- LOCAL QUIZ PRESENTER -->
+  <div id="local-quiz-area" style="display:none">
+    <div id="quiz-q-block"></div>
+    <div class="presenter-nav">
+      <button class="btn btn-primary" onclick="prevQ()">← Prev</button>
+      <button class="btn btn-primary" onclick="nextQ()">Next →</button>
+      <button class="btn btn-success" onclick="showResults()" style="margin-left:auto">📊 Results</button>
+      <span class="q-counter" id="quiz-counter">Q 1 / 18</span>
+    </div>
+    <div id="quiz-results-area" style="display:none;margin-top:1.5rem"></div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SPOT THE TRUTH -->
+  <div class="section-title">🔍 Spot the Genuine One</div>
+  <div class="section-subtitle">5 people claim an object is theirs. Audience votes for who they believe.</div>
+
+  <div class="voting-card">
+    <h3 style="margin-bottom:0.5rem;font-size:1rem">Set up the round</h3>
+    <div id="vote-name-inputs" style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.8rem">
+      <input class="q-open-answer" style="min-height:unset;padding:0.55rem 0.9rem" placeholder="Player 1" id="v1">
+      <input class="q-open-answer" style="min-height:unset;padding:0.55rem 0.9rem" placeholder="Player 2" id="v2">
+      <input class="q-open-answer" style="min-height:unset;padding:0.55rem 0.9rem" placeholder="Player 3" id="v3">
+      <input class="q-open-answer" style="min-height:unset;padding:0.55rem 0.9rem" placeholder="Player 4" id="v4">
+      <input class="q-open-answer" style="min-height:unset;padding:0.55rem 0.9rem;grid-column:1/-1" placeholder="Player 5" id="v5">
+    </div>
+    <div style="margin-bottom:0.8rem">
+      <input class="q-open-answer" style="min-height:unset;padding:0.55rem 0.9rem" placeholder="Object for this round (e.g. The Pink Umbrella)" id="vote-object">
+    </div>
+    <button class="btn btn-primary" onclick="openVoting()">Open Voting Board</button>
+  </div>
+
+  <div id="voting-board" style="display:none">
+    <div class="voting-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.8rem">
+        <div>
+          <div style="font-size:0.72rem;color:var(--accent);font-weight:700;letter-spacing:0.08em;text-transform:uppercase">Round Object</div>
+          <div style="font-size:1.2rem;font-weight:700" id="board-object"></div>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+          <button class="btn btn-danger" onclick="revealWinner()">🎉 Reveal Winner</button>
+          <button class="btn" onclick="resetVoting()">Reset</button>
+        </div>
+      </div>
+      <div class="vote-grid" id="vote-grid"></div>
+      <div style="text-align:center;margin-top:1rem;font-size:0.76rem;color:var(--muted)">Tap a contestant to cast a vote</div>
+    </div>
+    <div id="vote-results-bar" style="display:none" class="voting-card">
+      <h3 style="margin-bottom:0.8rem;font-size:1rem">Live Tally</h3>
+      <div id="vote-bars"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--               TEAM SECTION                -->
+<!-- ══════════════════════════════════════════ -->
+<div class="section" id="section-team">
+
+  <div class="section-title">🏆 Team Games</div>
+  <div class="section-subtitle">Set up teams, then pick a game. Points tracked live.</div>
+
+  <div class="teams-header">
+    <h3 style="font-size:0.95rem;font-weight:600">Teams</h3>
+    <button class="add-team-btn" onclick="addTeam()">＋ Add Team</button>
+    <button class="btn" style="margin-left:auto;font-size:0.78rem" onclick="resetScores()">Reset Scores</button>
+  </div>
+  <div class="teams-grid" id="teams-grid"></div>
+
+  <div class="picker-box">
+    <div class="pick-from">Random Nominee Picker</div>
+    <div class="picker-result" id="nominee-result">—</div>
+    <button class="btn btn-gold mt1" onclick="pickNominee()" style="margin-top:0.8rem">🎲 Pick Nominee</button>
+  </div>
+
+  <hr class="divider">
+
+  <div class="games-grid">
+    <div class="game-card" id="card-charades" onclick="showTeamGame('charades')">
+      <div class="game-icon">🎭</div>
+      <div class="game-title">Dumb Charades</div>
+      <div class="game-desc">Timer + team picker</div>
+    </div>
+    <div class="game-card" id="card-twisters" onclick="showTeamGame('twisters')">
+      <div class="game-icon">👅</div>
+      <div class="game-title">Tongue Twisters</div>
+      <div class="game-desc">8 rounds of pain</div>
+    </div>
+    <div class="game-card" id="card-songgame" onclick="showTeamGame('songgame')">
+      <div class="game-icon">🎵</div>
+      <div class="game-title">Song &amp; Object</div>
+      <div class="game-desc">Hear song, grab the thing</div>
+    </div>
+  </div>
+
+  <!-- DUMB CHARADES -->
+  <div class="game-content" id="team-game-charades" style="display:none">
+    <h2>🎭 Dumb Charades</h2>
+    <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.2rem">Movies on physical chits. Use this for team selection and timer.</p>
+    <div style="display:flex;gap:0.75rem;margin-bottom:1.2rem;flex-wrap:wrap">
+      <button class="btn" onclick="setCharadesTimer(60)">60s</button>
+      <button class="btn" onclick="setCharadesTimer(90)">90s</button>
+      <button class="btn" onclick="setCharadesTimer(120)">2 min</button>
+    </div>
+    <div class="timer-display" id="charades-timer">60</div>
+    <div class="flex-row mt1">
+      <button class="btn btn-primary" onclick="startCharadesTimer()" id="charades-start-btn">▶ Start</button>
+      <button class="btn" onclick="resetCharadesTimer()">↺ Reset</button>
+    </div>
+    <div style="margin-top:1.2rem;font-size:0.82rem;color:var(--muted)">Playing teams: <span id="charades-team-select" class="flex-row" style="display:inline-flex;gap:0.4rem"></span></div>
+  </div>
+
+  <!-- TONGUE TWISTERS -->
+  <div class="game-content" id="team-game-twisters" style="display:none">
+    <h2>👅 Tongue Twisters</h2>
+    <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.2rem">One person says it 3× fast. Audience judges. Win = 10 pts.</p>
+    <div id="twisters-list"></div>
+  </div>
+
+  <!-- SONG GAME TEAM -->
+  <div class="game-content" id="team-game-songgame" style="display:none">
+    <h2>🎵 Song &amp; Object Challenge</h2>
+    <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1.2rem">10 objects in the room. Music plays — first team to grab the right one wins the round (10 pts).</p>
+    <div class="song-grid" id="team-song-list"></div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <h3 id="modal-title"></h3>
+    <div class="modal-big" id="modal-body"></div>
+    <button class="btn btn-primary mt1" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════ THEME & SCHEME ═══════════════
+let isDark = true;
+let currentScheme = 'midnight';
+
+function toggleTheme() {
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  document.getElementById('theme-toggle').textContent = isDark ? '🌙' : '☀️';
+}
+
+function setScheme(scheme, el) {
+  currentScheme = scheme;
+  document.documentElement.setAttribute('data-scheme', scheme);
+  document.querySelectorAll('.scheme-dot').forEach(d => d.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Slide / focus mode
+let slideMode = false;
+function toggleSlideMode() {
+  slideMode = !slideMode;
+  document.body.classList.toggle('slide-mode', slideMode);
+  document.getElementById('fs-toggle').textContent = slideMode ? '✕ Exit Focus' : '⛶ Focus';
+  if (slideMode) {
+    document.body.requestFullscreen?.().catch(() => {});
+  } else {
+    document.exitFullscreen?.().catch(() => {});
+  }
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && slideMode) toggleSlideMode();
+});
+
+// ═══════════════ DATA ═══════════════
+const bollywoodQs = [
+  { en: "The black glasses suit you", hi: "Kala Chashma", movie: "Baar Baar Dekho" },
+  { en: "You made your entrance", hi: "Tune Maari Entriyaan", movie: "Gunday" },
+  { en: "The bangles speak", hi: "Bole Chudiyan", movie: "Kabhi Khushi Kabhie Gham" },
+  { en: "Which earring are you talking about?", hi: "What Jhumka?", movie: "Rocky Aur Rani Kii Prem Kahaani" },
+  { en: "Strong as glue, won't let go", hi: "Fevicol Se", movie: "Dabangg 2" },
+  { en: "If spice burns you, don't look at me", hi: "Tujhko Mirchi Lagi Toh", movie: "DDLJ" },
+  { en: "This heart was a blank page", hi: "Kora Kagaz Tha Yeh Mann Mera", movie: "Aradhana" },
+  { en: "One warm cup of tea in the morning", hi: "Ek Garam Chai Ki Pyaali Ho", movie: "Aandhi" },
+  { en: "The lemon fruit", hi: "Nimbooda Nimbooda", movie: "Hum Dil De Chuke Sanam" },
+  { en: "The dupatta", hi: "Chunari Chunari", movie: "Biwi No.1" },
+  { en: "My heart has been stolen", hi: "Dil Chori Sada", movie: "Sonu Ke Titu Ki Sweety" },
+  { en: "O beautiful one, where are you going?", hi: "Sunder Chori, Kahaan Chali?", movie: "Nayak" },
+  { en: "Keep dancing, keep dancing", hi: "Nachle Nachle", movie: "Dil Se" },
+  { en: "My beloved, my beloved", hi: "Mere Sajna, Mere Sajna", movie: "Maine Pyar Kiya" },
+];
+
+const punsQs = [
+  { clue: "🐝 + 🍳 (pan) = ?", answer: "Bee + Pan = 'Bepan' → Anticipation", hint: "Think sounds!" },
+  { clue: "🐈 + 🎤 (mic) = ?", answer: "Cat + Mic → 'Atomic'", hint: "Merge the sounds" },
+  { clue: "🦁 + 🎸 = ?", answer: "Lion + Guitar → 'Lying'", hint: "Animal sound" },
+  { clue: "🌊 + 👧 = ?", answer: "Wave + Girl → 'Wavy Girl'", hint: "Visual pun" },
+  { clue: "☕ + 🐻 = ?", answer: "Coffee + Bear → 'Kafkaesque'", hint: "Think literature" },
+  { clue: "🥕 + 🏋️ = ?", answer: "Carrot + Lift → 'Careful'", hint: "Compound word" },
+  { clue: "🐟 + 🎭 = ?", answer: "Fish + Theatre → 'Drama'", hint: "Metaphor" },
+  { clue: "🌙 + 🏦 = ?", answer: "Moon + Bank → 'Moonlighting'", hint: "Side gig?" },
+];
+
+const logoQs = [
+  { emoji: "🍎", company: "Apple", hint1: "Tech giant", hint2: "Bitten fruit", hint3: "iPhone maker" },
+  { emoji: "🎯", company: "Target", hint1: "US retail chain", hint2: "Red bullseye", hint3: "Big box store" },
+  { emoji: "🐦", company: "Twitter / X", hint1: "Social media", hint2: "Was a bird", hint3: "Now called X" },
+  { emoji: "🏹", company: "Amazon", hint1: "E-commerce", hint2: "A to Z", hint3: "Arrow smile logo" },
+  { emoji: "🔵", company: "Facebook / Meta", hint1: "Social network", hint2: "Blue lowercase", hint3: "Mark Z's company" },
+  { emoji: "🎵", company: "Spotify", hint1: "Music streaming", hint2: "Green circles", hint3: "Podcasts too" },
+  { emoji: "▶️", company: "YouTube", hint1: "Video platform", hint2: "Red rectangle", hint3: "Play button" },
+  { emoji: "🚗", company: "Tesla", hint1: "Electric cars", hint2: "T logo", hint3: "Elon's company" },
+  { emoji: "☕", company: "Starbucks", hint1: "Coffee chain", hint2: "Mermaid logo", hint3: "Green cups" },
+  { emoji: "📦", company: "UPS", hint1: "Delivery service", hint2: "Brown trucks", hint3: "Shield logo" },
+];
+
+const picWords = [
+  "Deadline", "Standout employee", "Quick sync", "Reply all",
+  "Work from home", "Inbox zero", "Team offsite", "Micromanagement",
+  "Pivot", "Bandwidth", "Circle back", "Low-hanging fruit",
+  "Boiling the ocean", "Moving the needle"
+];
+
+const twisters = [
+  { text: "She sells seashells by the seashore, the shells she sells are surely seashells.", level: "Classic" },
+  { text: "How much wood would a woodchuck chuck if a woodchuck could chuck wood? A woodchuck would chuck as much wood as a woodchuck would chuck if a woodchuck could chuck wood.", level: "Classic" },
+  { text: "Pad kid poured curd pulled cold — say this 10 times fast!", level: "World's hardest" },
+  { text: "The sixth sick sheikh's sixth sheep's sick. Again. And again. Don't mess up.", level: "Guinness level" },
+  { text: "I scream, you scream, we all scream for ice cream. But can you scream this eleven times?", level: "Medium" },
+  { text: "Betty Botter bought some butter, but the butter Betty bought was bitter. So Betty Botter bought some better butter to make the bitter butter better.", level: "Classic" },
+  { text: "Red lorry, yellow lorry, red lorry, yellow lorry — 5 times at full speed!", level: "Short but evil" },
+  { text: "Freshly fried flying fish. Freshly fried flying fish. Freshly fried flying fish. Three times, no pause.", level: "Deceptive" },
+];
+
+// Songs with Spotify track IDs — embedded inline via Spotify embed (works on Netlify)
+const songs = [
+  { title: "Kala Chashma", movie: "Baar Baar Dekho", spotifyId: "6mdLX10dvBb7rGYbMXpKzz", object: "Sunglasses" },
+  { title: "Tune Maari Entriyaan", movie: "Gunday", spotifyId: "2JSZhhYdzDbvN1YplDoJUR", object: "Entry card / ID" },
+  { title: "Bole Chudiyan", movie: "K3G", spotifyId: "10JFE3POLCsisDZSfejjIF", object: "Bangles" },
+  { title: "What Jhumka?", movie: "Rocky Aur Rani", spotifyId: "4uNxdQ1L4Xa52MWX864QhW", object: "Earrings" },
+  { title: "Fevicol Se", movie: "Dabangg 2", spotifyId: "4cCC37JvexySD9jAGFiAuU", object: "Glue / Fevicol" },
+  { title: "Tujhko Mirchi Lagi Toh", movie: "Coolie No.1", spotifyId: "46HqZTCD7Wqd0Q95iuuHmt", object: "Chilli / mirchi" },
+  { title: "Kora Kagaz", movie: "Aradhana", spotifyId: "58XCR4OiSlFULlDmACjrF8", object: "Blank paper" },
+  { title: "Ek Garam Chai Ki Pyaali Ho", movie: "Har Dil Jo Pyar Karega", spotifyId: "708PMEzm020VA9DL6Rq8ip", object: "Tea cup / mug" },
+  { title: "Nimbooda", movie: "Hum Dil De Chuke Sanam", spotifyId: "1uuSQ8eR2i3oHq8DRC4PEL", object: "Lemon" },
+  { title: "Chunari Chunari", movie: "Biwi No.1", spotifyId: "20DabwrGrz88OR6miTjtt3", object: "Dupatta / scarf" },
+];
+
+// ═══════════════ STATE ═══════════════
+let bwIdx = 0, punIdx = 0, logoIdx = 0, quizIdx = 0;
+let picTimerVal = 60, picTimerRunning = false, picTimerInterval = null;
+let chaTimerVal = 60, chaTimerRunning = false, chaTimerInterval = null;
+let activeSongIdx = null; // track which song card is open
+
+let teams = [
+  { name: "Team Optimus", score: 0 },
+  { name: "Team DA", score: 0 },
+  { name: "Team CX", score: 0 },
+];
+let voteCount = [0,0,0,0,0];
+let voteNames = [];
+
+const quizQuestions = [
+  { q: "The scariest thing in office is:", type: "mcq", opts: ["Meeting at 10 AM", "Exhausted Claude credits", "That one employee", "Samarth's bad mood"] },
+  { q: "Samarth looks at your deck. What does he notice first?", type: "mcq", opts: ["The big strategic insight", "The missing storyline", "A comma on slide 17", "Two boxes off by 2 pixels"] },
+  { q: "My current relationship with deadlines is:", type: "mcq", opts: ["I respect them", "They scare me", "We have an understanding (mostly ignored)", "Deadlines? What deadlines?"] },
+  { q: "The ideal time to ask Samarth for big new work on a Friday is:", type: "mcq", opts: ["9:00 AM", "11:00 AM", "12:59 PM", "Next Monday"] },
+  { q: "My Slack/Teams notification strategy is:", type: "mcq", opts: ["Instantly reply", "Reply when I can", "Reply when reminded", "Pretend I didn't see it"] },
+  { q: "When someone says 'quick sync', I think:", type: "mcq", opts: ["5 minutes max", "15–30 minutes", "There is no such thing as quick sync", "I start preparing for a long journey"] },
+  { q: "Which is your favourite team under Samarth?", type: "mcq", opts: ["Optimus", "DA", "CX", "Modelling", "All of them ❤️", "I'm here for the snacks"] },
+  { q: "My calendar is best described as:", type: "mcq", opts: ["Perfectly planned", "A bit chaotic", "Controlled chaos", "A group chat in disguise"] },
+  { q: "If Samarth joined a talent show, what would he win?", type: "mcq", opts: ["Best storyteller", "Spot-the-mistake champion", "Most chill judge", "Turning 2 min answer into a compelling narrative"] },
+  { q: "My ideal workday ends at:", type: "mcq", opts: ["5 PM sharp", "When I finish my tasks", "When my brain stops working", "'Just one more thing…'"] },
+  { q: "The work I do is:", type: "mcq", opts: ["Deeply meaningful and life-changing", "Occasionally interesting", "Neither interesting nor boring", "I'm here for end-of-month credits :)"] },
+  { q: "When I open my laptop in the morning, I feel:", type: "mcq", opts: ["Ready to conquer the world", "Slight confusion", "Mild regret", "'Let's see what breaks today'"] },
+  { q: "Samarth's superpower is probably:", type: "mcq", opts: ["Storytelling clarity", "Spotting missing ownership", "Fixing structure instantly", "Finding issues no one noticed"] },
+  { q: "The biggest challenge at work is usually:", type: "mcq", opts: ["The work itself", "Prioritisation", "Meetings", "Finding where I left the context"] },
+  { q: "My reaction when a new meeting invite comes in:", type: "mcq", opts: ["'Great, let's go'", "'Hmm okay'", "'Do I really need this?'", "'Decline (mentally)'"] },
+  { q: "Samarth looks at your deck. What does he say next?", type: "mcq", opts: ["'What's the story here?'", "'What's the takeaway?'", "'Can we simplify this?'", "All of the above"] },
+  { q: "My preferred way of working is:", type: "mcq", opts: ["Deep focus, no distractions", "Some multitasking is fine", "Controlled chaos with music", "Panic + productivity combo"] },
+  { q: "The most dangerous phrase in office life is:", type: "mcq", opts: ["'Quick question…'", "'Just one small change'", "'Can we align on this?'", "'Reply all'"] },
+];
+let quizVotes = quizQuestions.map(q => q.opts.map(() => 0));
+
+// ═══════════════ NAV ═══════════════
+function switchSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'team') renderTeams();
+}
+
+// ═══════════════ INDIVIDUAL GAMES ═══════════════
+function showGame(id) {
+  ['bollywood','puns','logos','pictionary','songs'].forEach(g => {
+    document.getElementById('game-' + g).style.display = 'none';
+    document.getElementById('card-' + g)?.classList.remove('active-game');
+  });
+  document.getElementById('game-' + id).style.display = 'block';
+  document.getElementById('card-' + id)?.classList.add('active-game');
+  document.getElementById('game-' + id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (id === 'bollywood') renderBW();
+  if (id === 'puns') renderPun();
+  if (id === 'logos') renderLogo();
+  if (id === 'songs') renderSongs();
+}
+
+// ─── BOLLYWOOD ───
+function renderBW() {
+  const q = bollywoodQs[bwIdx];
+  document.getElementById('bw-question').innerHTML = `
+    <div class="question-block">
+      <div class="q-number">Question ${bwIdx+1} of ${bollywoodQs.length}</div>
+      <div class="q-text">"${q.en}"</div>
+      <span class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</span>
+      <div class="hidden-ans">🎵 ${q.hi} — ${q.movie}</div>
+    </div>`;
+  document.getElementById('bw-counter').textContent = `${bwIdx+1} / ${bollywoodQs.length}`;
+}
+function nextBW() { bwIdx = (bwIdx+1) % bollywoodQs.length; renderBW(); }
+function prevBW() { bwIdx = (bwIdx-1+bollywoodQs.length) % bollywoodQs.length; renderBW(); }
+
+// ─── PUNS ───
+function renderPun() {
+  const q = punsQs[punIdx];
+  document.getElementById('puns-question').innerHTML = `
+    <div class="question-block">
+      <div class="q-number">Pun ${punIdx+1} of ${punsQs.length}</div>
+      <div class="q-text" style="font-size:1.6rem;text-align:center;padding:1rem 0">${q.clue}</div>
+      <div style="font-size:0.78rem;color:var(--muted);text-align:center;margin-bottom:0.5rem">Hint: ${q.hint}</div>
+      <span class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Answer</span>
+      <div class="hidden-ans">✅ ${q.answer}</div>
+    </div>`;
+  document.getElementById('pun-counter').textContent = `${punIdx+1} / ${punsQs.length}`;
+}
+function nextPun() { punIdx = (punIdx+1) % punsQs.length; renderPun(); }
+function prevPun() { punIdx = (punIdx-1+punsQs.length) % punsQs.length; renderPun(); }
+
+// ─── LOGOS ───
+function renderLogo() {
+  const q = logoQs[logoIdx];
+  document.getElementById('logo-question').innerHTML = `
+    <div class="question-block">
+      <div class="q-number">Logo ${logoIdx+1} of ${logoQs.length}</div>
+      <div style="font-size:4rem;text-align:center;margin:0.8rem 0">${q.emoji}</div>
+      <div style="display:grid;gap:0.5rem;margin-bottom:0.8rem">
+        <div class="q-option" style="cursor:default">🔵 Hint 1: ${q.hint1}</div>
+        <div class="q-option" style="cursor:default">🟡 Hint 2: ${q.hint2}</div>
+        <div class="q-option" style="cursor:default">🔴 Hint 3: ${q.hint3}</div>
+      </div>
+      <span class="reveal-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Reveal Brand</span>
+      <div class="hidden-ans">🏷️ ${q.company}</div>
+    </div>`;
+  document.getElementById('logo-counter').textContent = `${logoIdx+1} / ${logoQs.length}`;
+}
+function nextLogo() { logoIdx = (logoIdx+1) % logoQs.length; renderLogo(); }
+function prevLogo() { logoIdx = (logoIdx-1+logoQs.length) % logoQs.length; renderLogo(); }
+
+// ─── PICTIONARY ───
+let picTimerVal2 = 60;
+function setPicTimer(s) { picTimerVal2 = s; resetPicTimer(); }
+function resetPicTimer() {
+  clearInterval(picTimerInterval); picTimerRunning = false;
+  document.getElementById('pic-timer').textContent = picTimerVal2;
+  document.getElementById('pic-timer').classList.remove('danger');
+  document.getElementById('pic-start-btn').textContent = '▶ Start';
+}
+function startPicTimer() {
+  if (picTimerRunning) { clearInterval(picTimerInterval); picTimerRunning = false; document.getElementById('pic-start-btn').textContent = '▶ Start'; return; }
+  let t = parseInt(document.getElementById('pic-timer').textContent);
+  picTimerRunning = true;
+  document.getElementById('pic-start-btn').textContent = '⏸ Pause';
+  picTimerInterval = setInterval(() => {
+    t--;
+    document.getElementById('pic-timer').textContent = t;
+    if (t <= 10) document.getElementById('pic-timer').classList.add('danger');
+    if (t <= 0) { clearInterval(picTimerInterval); picTimerRunning = false; document.getElementById('pic-start-btn').textContent = '▶ Start'; showModal('⏰ Time\'s up!', 'BUZZ!'); }
+  }, 1000);
+}
+function pickPicWord() {
+  document.getElementById('pic-word').textContent = picWords[Math.floor(Math.random() * picWords.length)];
+}
+
+// ─── SONGS — Spotify embed player ───
+// Spotify embeds work on any https:// hosted page (Netlify, etc.) with no restrictions.
+// The embed shows album art, title, and a play button. No login needed for 30s previews;
+// logged-in users get the full track.
+
+function makeSongCard(s, i, prefix) {
+  const baseSrc = 'https://open.spotify.com/embed/track/' + s.spotifyId + '?utm_source=generator&theme=0';
+  const autoSrc = baseSrc + '&autoplay=1';
+  return `
+    <div class="song-card" id="${prefix}scard-${i}">
+      <div class="song-header" onclick="toggleSongCard(${i},'${prefix}')">
+        <div class="song-num">${i+1}</div>
+        <div style="flex:1;min-width:0">
+          <div class="song-title-text">${s.title}</div>
+          <div class="song-movie">${s.movie}</div>
+        </div>
+        <button class="song-play-btn" id="${prefix}splay-${i}" aria-label="Play">&#9654;</button>
+      </div>
+      <div class="song-embed" id="${prefix}sembed-${i}">
+        <div class="spotify-wrap">
+          <iframe id="${prefix}sp-iframe-${i}"
+            src="${baseSrc}"
+            data-base="${baseSrc}"
+            data-auto="${autoSrc}"
+            width="100%" height="152" frameBorder="0" allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            style="display:block;border-radius:0;"></iframe>
+        </div>
+        <div class="song-object-tag">Grab: <strong>${s.object}</strong></div>
+      </div>
+    </div>`;
+}
+
+function renderSongs() {
+  document.getElementById('song-list').innerHTML = songs.map(function(s,i){ return makeSongCard(s,i,''); }).join('');
+}
+function renderTeamSongs() {
+  document.getElementById('team-song-list').innerHTML = songs.map(function(s,i){ return makeSongCard(s,i,'t'); }).join('');
+}
+
+function toggleSongCard(i, prefix) {
+  const embed = document.getElementById(prefix + 'sembed-' + i);
+  const isOpen = embed.classList.contains('open');
+
+  // Stop all other open players by resetting src (removes autoplay, pauses)
+  songs.forEach(function(s, j) {
+    const otherEmbed = document.getElementById(prefix + 'sembed-' + j);
+    if (otherEmbed && otherEmbed.classList.contains('open')) {
+      otherEmbed.classList.remove('open');
+      document.getElementById(prefix + 'splay-' + j).textContent = '\u25b6';
+      const f = document.getElementById(prefix + 'sp-iframe-' + j);
+      if (f) f.src = f.dataset.base;
+    }
+  });
+
+  if (!isOpen) {
+    embed.classList.add('open');
+    document.getElementById(prefix + 'splay-' + i).textContent = '\u25a0';
+    // Swap to autoplay src — this click IS the user gesture browsers require
+    const frame = document.getElementById(prefix + 'sp-iframe-' + i);
+    if (frame) frame.src = frame.dataset.auto;
+  }
+}
+
+// ─── LOCAL QUIZ ───
+function startLocalQuiz() {
+  document.getElementById('local-quiz-area').style.display = 'block';
+  renderQ();
+  document.getElementById('local-quiz-area').scrollIntoView({ behavior: 'smooth' });
+}
+function renderQ() {
+  const q = quizQuestions[quizIdx];
+  document.getElementById('quiz-q-block').innerHTML = `
+    <div class="question-block">
+      <div class="q-number">Q${quizIdx+1} of ${quizQuestions.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options">
+        ${q.opts.map((o,i) => `<div class="q-option" onclick="voteQuiz(${quizIdx},${i},this)">${String.fromCharCode(65+i)}. ${o}</div>`).join('')}
+      </div>
+    </div>`;
+  document.getElementById('quiz-counter').textContent = `Q${quizIdx+1} / ${quizQuestions.length}`;
+}
+function voteQuiz(qi, oi, el) {
+  quizVotes[qi][oi]++;
+  el.style.borderColor = 'var(--accent)';
+  el.style.background = 'rgba(124,92,252,0.12)';
+}
+function nextQ() { quizIdx = Math.min(quizIdx+1, quizQuestions.length-1); renderQ(); }
+function prevQ() { quizIdx = Math.max(quizIdx-1, 0); renderQ(); }
+function showResults() {
+  const area = document.getElementById('quiz-results-area');
+  area.style.display = 'block';
+  const q = quizQuestions[quizIdx];
+  const votes = quizVotes[quizIdx];
+  const total = votes.reduce((a,b) => a+b, 0) || 1;
+  const colors = ['var(--accent)','var(--accent2)','var(--accent3)','var(--accent4)','#60a5fa','#a78bfa'];
+  area.innerHTML = `<div class="question-block">
+    <div class="q-number">Results — Q${quizIdx+1}</div>
+    <div class="q-text" style="margin-bottom:1rem">${q.q}</div>
+    ${votes.map((v,i) => `
+      <div class="bar-row">
+        <div class="bar-opt">${String.fromCharCode(65+i)}. ${q.opts[i].substring(0,22)}${q.opts[i].length>22?'…':''}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/total*100)}%;background:${colors[i%colors.length]}">${Math.round(v/total*100)}%</div></div>
+        <div class="bar-count">${v}</div>
+      </div>`).join('')}
+  </div>`;
+  area.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ─── VOTING ───
+function openVoting() {
+  voteNames = [1,2,3,4,5].map(i => document.getElementById('v'+i).value || 'Player '+i);
+  const obj = document.getElementById('vote-object').value || 'Mystery Object';
+  document.getElementById('board-object').textContent = obj;
+  voteCount = [0,0,0,0,0];
+  document.getElementById('voting-board').style.display = 'block';
+  renderVoteGrid();
+  document.getElementById('voting-board').scrollIntoView({ behavior: 'smooth' });
+}
+const avatarEmojis = ['🎩','👒','🧢','🎓','👑'];
+function renderVoteGrid() {
+  document.getElementById('vote-grid').innerHTML = voteNames.map((n,i) => `
+    <div class="vote-item" id="vote-item-${i}" onclick="castVote(${i})">
+      <div class="vote-avatar">${avatarEmojis[i]}</div>
+      <div class="vote-name">${n}</div>
+      <div class="vote-tally" id="vote-tally-${i}">${voteCount[i]}</div>
+    </div>`).join('');
+}
+function castVote(i) {
+  voteCount[i]++;
+  document.getElementById('vote-tally-'+i).textContent = voteCount[i];
+  document.getElementById('vote-item-'+i).classList.add('voted');
+  setTimeout(() => document.getElementById('vote-item-'+i).classList.remove('voted'), 400);
+  showVoteBars();
+}
+function showVoteBars() {
+  const area = document.getElementById('vote-results-bar');
+  const total = voteCount.reduce((a,b) => a+b,0) || 1;
+  area.style.display = 'block';
+  document.getElementById('vote-bars').innerHTML = voteNames.map((n,i) => `
+    <div class="bar-row">
+      <div class="bar-opt">${n}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(voteCount[i]/total*100)}%;background:var(--accent)">${Math.round(voteCount[i]/total*100)}%</div></div>
+      <div class="bar-count">${voteCount[i]}</div>
+    </div>`).join('');
+}
+function revealWinner() {
+  const max = Math.max(...voteCount);
+  const winIdx = voteCount.indexOf(max);
+  showModal('🏆 The Crowd Believes...', voteNames[winIdx] + '!');
+}
+function resetVoting() {
+  voteCount = [0,0,0,0,0];
+  renderVoteGrid();
+  document.getElementById('vote-results-bar').style.display = 'none';
+}
+
+// ─── TEAMS ───
+function renderTeams() {
+  const grid = document.getElementById('teams-grid');
+  grid.innerHTML = teams.map((t,i) => `
+    <div class="team-card">
+      <button class="remove-team" onclick="removeTeam(${i})">×</button>
+      <input class="team-name-input" value="${t.name}" onchange="teams[${i}].name=this.value;refreshTeamPicker()">
+      <div class="team-score">${t.score}</div>
+      <div class="score-btns">
+        <button class="score-btn minus" onclick="changeScore(${i},-10)">−10</button>
+        <button class="score-btn minus" onclick="changeScore(${i},-5)">−5</button>
+        <button class="score-btn plus" onclick="changeScore(${i},5)">+5</button>
+        <button class="score-btn plus" onclick="changeScore(${i},10)">+10</button>
+      </div>
+    </div>`).join('');
+  refreshTeamPicker();
+}
+function changeScore(i, delta) { teams[i].score = Math.max(0, teams[i].score + delta); renderTeams(); }
+function addTeam() { teams.push({ name: 'New Team', score: 0 }); renderTeams(); }
+function removeTeam(i) { if (teams.length <= 2) return alert('Need at least 2 teams!'); teams.splice(i,1); renderTeams(); }
+function resetScores() { teams.forEach(t => t.score = 0); renderTeams(); }
+function refreshTeamPicker() {
+  const el = document.getElementById('charades-team-select');
+  if (el) el.innerHTML = teams.map(t => `<span class="tag tag-purple">${t.name}</span>`).join('');
+}
+function pickNominee() {
+  const t = teams[Math.floor(Math.random() * teams.length)];
+  const el = document.getElementById('nominee-result');
+  let count = 0;
+  const interval = setInterval(() => {
+    const rt = teams[Math.floor(Math.random() * teams.length)];
+    el.textContent = rt.name;
+    count++;
+    if (count > 15) { clearInterval(interval); el.textContent = '🎯 ' + t.name; }
+  }, 80);
+}
+
+// ─── TEAM GAMES ───
+function showTeamGame(id) {
+  ['charades','twisters','songgame'].forEach(g => {
+    document.getElementById('team-game-'+g).style.display = 'none';
+    document.getElementById('card-'+g)?.classList.remove('active-game');
+  });
+  document.getElementById('team-game-'+id).style.display = 'block';
+  document.getElementById('card-'+id)?.classList.add('active-game');
+  document.getElementById('team-game-'+id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (id === 'twisters') renderTwisters();
+  if (id === 'songgame') renderTeamSongs();
+  if (id === 'charades') refreshTeamPicker();
+}
+function renderTwisters() {
+  document.getElementById('twisters-list').innerHTML = twisters.map((t,i) => `
+    <div class="twist-card">
+      <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.5rem">
+        <span class="round-badge">Round ${i+1}</span>
+        <span class="tag tag-${i%2===0?'pink':'teal'}">${t.level}</span>
+        <button class="btn btn-gold" style="margin-left:auto;padding:0.28rem 0.8rem;font-size:0.74rem" onclick="pickTwisterNominee(${i})">Pick Player</button>
+      </div>
+      <div class="twist-text">${t.text}</div>
+    </div>`).join('');
+}
+function pickTwisterNominee(roundIdx) {
+  const t = teams[Math.floor(Math.random() * teams.length)];
+  showModal(`Round ${roundIdx+1} Nominee`, t.name);
+}
+
+// ─── CHARADES TIMER ───
+function setCharadesTimer(s) { chaTimerVal = s; resetCharadesTimer(); }
+function resetCharadesTimer() {
+  clearInterval(chaTimerInterval); chaTimerRunning = false;
+  document.getElementById('charades-timer').textContent = chaTimerVal;
+  document.getElementById('charades-timer').classList.remove('danger');
+  document.getElementById('charades-start-btn').textContent = '▶ Start';
+}
+function startCharadesTimer() {
+  if (chaTimerRunning) { clearInterval(chaTimerInterval); chaTimerRunning = false; document.getElementById('charades-start-btn').textContent = '▶ Start'; return; }
+  let t = parseInt(document.getElementById('charades-timer').textContent);
+  chaTimerRunning = true;
+  document.getElementById('charades-start-btn').textContent = '⏸ Pause';
+  chaTimerInterval = setInterval(() => {
+    t--;
+    document.getElementById('charades-timer').textContent = t;
+    if (t <= 10) document.getElementById('charades-timer').classList.add('danger');
+    if (t <= 0) { clearInterval(chaTimerInterval); chaTimerRunning = false; document.getElementById('charades-start-btn').textContent = '▶ Start'; showModal('⏰ Time\'s up!', 'BUZZ!'); }
+  }, 1000);
+}
+
+// ─── MODAL ───
+function showModal(title, body) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').textContent = body;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+// ─── INIT ───
+renderBW();
+renderPun();
+renderLogo();
+renderTeams();
+</script>
+</body>
+</html>
